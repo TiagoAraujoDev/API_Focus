@@ -6,8 +6,14 @@ class CreateTaskController {
   constructor(private createTaskUseCase: CreateTaskUseCase) {}
   handle(request: Request, response: Response): Response {
     const { title } = request.body;
-    const task = this.createTaskUseCase.execute({ title });
-    return response.status(201).json({ task });
+    try {
+      const task = this.createTaskUseCase.execute({ title });
+      return response.status(201).json({ task });
+    } catch (err) {
+      return response.status(502).json({
+        error: err.message,
+      });
+    }
   }
 }
 

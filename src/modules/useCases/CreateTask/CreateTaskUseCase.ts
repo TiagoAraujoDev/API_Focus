@@ -9,6 +9,9 @@ class CreateTaskUseCase {
   constructor(private taskRepository: TasksRepository) {}
   execute({ title }: IRequest): Task {
     const task = this.taskRepository.create({ title });
+    if (!task) {
+      throw new Error("Unespected error!");
+    }
     return task;
   }
 }
