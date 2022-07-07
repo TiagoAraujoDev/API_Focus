@@ -27,19 +27,15 @@ class TasksRepository implements ITasksRepository {
   list(): Task[] {
     return this.tasks;
   }
-  modify(task_id: string): Task {
+  checkTask(task_id: string): Task {
     const task = this.tasks.find((task) => task.id === task_id);
-
-    if (!task) {
-      throw new Error("Task doesn't exist!");
-    }
 
     task.done = true;
     task.updated_at = new Date();
 
     return task;
   }
-  remove(task_id: string): void {
+  removeTask(task_id: string): void {
     const taskIndex = this.tasks.findIndex((task) => task.id === task_id);
 
     if (taskIndex === -1) {
@@ -47,6 +43,10 @@ class TasksRepository implements ITasksRepository {
     }
 
     this.tasks.splice(taskIndex, 1);
+  }
+  findById(task_id: string): Task {
+    const task = this.tasks.find((task) => task.id === task_id);
+    return task;
   }
 }
 

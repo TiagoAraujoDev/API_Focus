@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { checkTaskController } from "../modules/useCases/CheckTask";
 import { createTaskController } from "../modules/useCases/CreateTask";
 import { listAllTasksController } from "../modules/useCases/ListTasks";
 
@@ -13,8 +14,10 @@ tasksRoutes.get("/", (request, response) => {
   return listAllTasksController.handle(request, response);
 });
 
-tasksRoutes.put("/", (request, response) => {});
+tasksRoutes.put("/:task_id", (request, response) => {
+  return checkTaskController.handle(request, response);
+});
 
-tasksRoutes.delete("/", (request, response) => {});
+tasksRoutes.delete("/:task_id", (request, response) => {});
 
 export { tasksRoutes };

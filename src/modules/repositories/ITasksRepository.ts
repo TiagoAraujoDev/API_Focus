@@ -6,7 +6,8 @@ interface ICreateTaskDTO {
 interface ITasksRepository {
   create({ title }: ICreateTaskDTO): Task;
   list(): Task[];
-  modify(task_id: string): Task;
-  remove(task_id: string): void;
+  checkTask(task_id: string): Task;
+  removeTask(task_id: string): void;
+  findById(task_id: string): Task;
 }
 export { ITasksRepository, ICreateTaskDTO };
