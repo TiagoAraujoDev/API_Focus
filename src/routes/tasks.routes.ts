@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { checkTaskController } from "../modules/useCases/CheckTask";
 import { createTaskController } from "../modules/useCases/CreateTask";
+import { deleteTaskController } from "../modules/useCases/DeleteTask";
 import { listAllTasksController } from "../modules/useCases/ListTasks";
 
 const tasksRoutes = Router();
@@ -18,6 +19,8 @@ tasksRoutes.put("/:task_id", (request, response) => {
   return checkTaskController.handle(request, response);
 });
 
-tasksRoutes.delete("/:task_id", (request, response) => {});
+tasksRoutes.delete("/:task_id", (request, response) => {
+  return deleteTaskController.handle(request, response);
+});
 
 export { tasksRoutes };
