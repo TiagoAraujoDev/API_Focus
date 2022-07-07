@@ -9,7 +9,7 @@ class ListAllTasksController {
       const tasks = this.listAllTasksUseCase.execute();
       return response.json({ tasks });
     } catch (err) {
-      return response.status(502).json({
+      return response.status(500).json({
         error: err.message,
       });
     }

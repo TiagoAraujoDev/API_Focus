@@ -10,7 +10,7 @@ class CreateTaskController {
       const task = this.createTaskUseCase.execute({ title });
       return response.status(201).json({ task });
     } catch (err) {
-      return response.status(502).json({
+      return response.status(500).json({
         error: err.message,
       });
     }
