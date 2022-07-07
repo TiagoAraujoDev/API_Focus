@@ -1,18 +1,21 @@
 import { Task } from "../../model/Task";
-import { TasksRepository } from "../../repositories/implamentations/TasksRepository";
-
-interface IRequest {
-  title: string;
-}
+import {
+  ICreateTaskDTO,
+  ITasksRepository,
+} from "../../repositories/ITasksRepository";
 
 class CreateTaskUseCase {
-  constructor(private taskRepository: TasksRepository) {}
-  execute({ title }: IRequest): Task {
+  constructor(private taskRepository: ITasksRepository) {}
+
+  execute({ title }: ICreateTaskDTO): Task {
     const task = this.taskRepository.create({ title });
+
     if (!task) {
-      throw new Error("Unespected error!");
+      throw new Error("Unexpected error!");
     }
+
     return task;
   }
 }
+
 export { CreateTaskUseCase };
