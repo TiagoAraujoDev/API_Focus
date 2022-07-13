@@ -13,7 +13,7 @@ export class CreateTask1657665273868 implements MigrationInterface {
           },
           {
             name: "title",
-            type: "string",
+            type: "varchar",
           },
           {
             name: "done",

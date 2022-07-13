@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 
 export const appDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: "database_pomoroutine",
   port: 5432,
   username: "docker",
   password: "1234",
@@ -14,6 +14,6 @@ export const appDataSource = new DataSource({
 appDataSource
   .initialize()
   .then(async () => {
-    console.log("initializing Database...");
+    console.log("database initialized");
   })
   .catch((err) => console.log(err));
