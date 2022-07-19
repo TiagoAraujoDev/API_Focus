@@ -1,4 +1,4 @@
-import { Task } from "../../model/Task";
+import { Task } from "../../entities/Task";
 import {
   ICreateTaskDTO,
   ITasksRepository,

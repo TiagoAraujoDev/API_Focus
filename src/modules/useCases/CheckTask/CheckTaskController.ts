@@ -5,11 +5,11 @@ import { CheckTaskUseCase } from "./CheckTaskUseCase";
 class CheckTaskController {
   constructor(private checkTaskUseCase: CheckTaskUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const { task_id } = request.params;
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { task_id } = request.body;
 
     try {
-      const task = this.checkTaskUseCase.execute(task_id);
+      const task = await this.checkTaskUseCase.execute(task_id);
 
       return response.json({ task });
     } catch (err) {
