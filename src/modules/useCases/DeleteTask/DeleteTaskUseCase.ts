@@ -1,16 +1,17 @@
 import { ITasksRepository } from "../../repositories/ITasksRepository";
 
+interface IRequest {
+  id: string;
+}
 class DeleteTaskUseCase {
   constructor(private tasksRepository: ITasksRepository) {}
 
-  execute(task_id: string): void {
-    const taskExist = this.tasksRepository.findById(task_id);
+  async execute({ id }: IRequest): Promise<void> {
+    const deletedTask = await this.tasksRepository.removeTask(id);
 
-    if (!taskExist) {
+    if (!deletedTask) {
       throw new Error("Task doesn't exist!");
     }
-
-    this.tasksRepository.removeTask(task_id);
   }
 }
 

@@ -5,11 +5,13 @@ import { DeleteTaskUseCase } from "./DeleteTaskUseCase";
 class DeleteTaskController {
   constructor(private deleteTaskUseCase: DeleteTaskUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const { task_id } = request.params;
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { id } = request.headers;
 
     try {
-      this.deleteTaskUseCase.execute(task_id);
+      await this.deleteTaskUseCase.execute({ id } as {
+        id: string;
+      });
 
       return response.status(204).send();
     } catch (err) {

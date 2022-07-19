@@ -16,7 +16,7 @@ class TasksRepository implements ITasksRepository {
       title,
     });
 
-    this.repository.save(newTask);
+    await this.repository.save(newTask);
   }
 
   async list(): Promise<Task[]> {
@@ -25,20 +25,17 @@ class TasksRepository implements ITasksRepository {
     return tasks;
   }
 
-  async checkTask(task_id: string): Promise<Task> {
-    const task = await this.repository.findOneBy({ task_id });
+  async checkTask(id: string): Promise<Task> {
+    const task = await this.repository.findOneBy({ id });
 
     task.done = true;
 
     return task;
   }
-  async removeTask(task_id: string): Promise<void> {
-    const task = await this.repository.findOneBy({ task_id });
+  async removeTask(id: string): Promise<Task> {
+    const task = await this.repository.findOneBy({ id });
 
     this.repository.remove(task);
-  }
-  async findById(task_id: string): Promise<Task> {
-    const task = await this.repository.findOne({ task_id });
 
     return task;
   }

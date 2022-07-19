@@ -5,9 +5,9 @@ import { ListAllTasksUseCase } from "./ListAllTasksUseCase";
 class ListAllTasksController {
   constructor(private listAllTasksUseCase: ListAllTasksUseCase) {}
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const tasks = this.listAllTasksUseCase.execute();
+      const tasks = await this.listAllTasksUseCase.execute();
 
       return response.json({ tasks });
     } catch (err) {

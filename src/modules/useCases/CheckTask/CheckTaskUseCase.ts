@@ -1,11 +1,15 @@
 import { Task } from "../../entities/Task";
 import { ITasksRepository } from "../../repositories/ITasksRepository";
 
+interface IRequest {
+  id: string;
+}
+
 class CheckTaskUseCase {
   constructor(private tasksRepository: ITasksRepository) {}
 
-  async execute(task_id: string): Promise<Task> {
-    const taskChecked = await this.tasksRepository.checkTask(task_id);
+  async execute({ id }: IRequest): Promise<Task> {
+    const taskChecked = await this.tasksRepository.checkTask(id);
 
     if (!taskChecked) {
       throw new Error("This Task doesn't exist!");

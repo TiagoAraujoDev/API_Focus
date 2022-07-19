@@ -6,10 +6,12 @@ class CheckTaskController {
   constructor(private checkTaskUseCase: CheckTaskUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { task_id } = request.body;
+    const { id } = request.headers;
 
     try {
-      const task = await this.checkTaskUseCase.execute(task_id);
+      const task = await this.checkTaskUseCase.execute({ id } as {
+        id: string;
+      });
 
       return response.json({ task });
     } catch (err) {

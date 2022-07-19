@@ -2,8 +2,9 @@ import { TasksRepository } from "../../repositories/implamentations/TasksReposit
 import { DeleteTaskController } from "./DeleteTaskController";
 import { DeleteTaskUseCase } from "./DeleteTaskUseCase";
 
-const tasksRepository = TasksRepository.getInstance();
-const deleteTaskUseCase = new DeleteTaskUseCase(tasksRepository);
-const deleteTaskController = new DeleteTaskController(deleteTaskUseCase);
-
-export { deleteTaskController };
+export default (): DeleteTaskController => {
+  const tasksRepository = new TasksRepository();
+  const deleteTaskUseCase = new DeleteTaskUseCase(tasksRepository);
+  const deleteTaskController = new DeleteTaskController(deleteTaskUseCase);
+  return deleteTaskController;
+};
