@@ -2,13 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  // JoinColumn,
-  // ManyToOne,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuidv4 } from "uuid";
 
-// import { User } from "./User";
+import { User } from "./User";
 
 @Entity("tasks")
 class Task {
@@ -27,9 +27,12 @@ class Task {
   @CreateDateColumn()
   updated_at: Date;
 
-  // @ManyToOne(() => User, (user) => user.tasks)
-  // @JoinColumn({ name: "user_id" })
-  // user: User;
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
   constructor() {
     if (!this.id) {
