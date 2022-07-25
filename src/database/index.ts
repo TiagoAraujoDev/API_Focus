@@ -10,6 +10,7 @@ export const appDataSource = new DataSource({
   username: "docker",
   password: "1234",
   database: "pomoroutinedb",
+  entities: ["./src/modules/entities/*.ts"],
   migrations: ["./src/database/migrations/*.ts"],
 });
 
