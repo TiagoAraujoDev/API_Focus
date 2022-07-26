@@ -6,8 +6,8 @@ import {
 class CreateTaskUseCase {
   constructor(private taskRepository: ITasksRepository) {}
 
-  async execute({ title }: ICreateTaskDTO): Promise<void> {
-    await this.taskRepository.create({ title });
+  async execute({ title, user_id }: ICreateTaskDTO): Promise<void> {
+    await this.taskRepository.create({ title, user_id });
   }
 }
 

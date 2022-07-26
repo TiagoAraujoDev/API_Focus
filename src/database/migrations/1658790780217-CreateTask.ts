@@ -18,6 +18,7 @@ export class CreateTask1658790780217 implements MigrationInterface {
           {
             name: "done",
             type: "boolean",
+            default: false,
           },
           {
             name: "user_id",
