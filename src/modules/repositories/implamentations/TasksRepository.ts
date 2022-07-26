@@ -33,6 +33,8 @@ class TasksRepository implements ITasksRepository {
 
     task.done = true;
 
+    await this.repository.save(task);
+
     return task;
   }
   async removeTask(id: string): Promise<Task> {
