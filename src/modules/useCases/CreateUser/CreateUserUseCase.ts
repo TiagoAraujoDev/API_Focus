@@ -1,3 +1,5 @@
+import { hash } from "bcryptjs";
+
 import { AppError } from "../../../errors/AppError";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
@@ -11,10 +13,12 @@ class CreateUserUseCase {
       throw new AppError("Email already registered!");
     }
 
+    const passwordHash = await hash(password, 8);
+
     const user = await this.usersRepository.create({
       name,
       username,
-      password,
+      password: passwordHash,
       email,
     });
 
