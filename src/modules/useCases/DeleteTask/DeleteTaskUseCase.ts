@@ -1,3 +1,4 @@
+import { AppError } from "../../../errors/AppError";
 import { ITasksRepository } from "../../repositories/ITasksRepository";
 
 interface IRequest {
@@ -10,7 +11,7 @@ class DeleteTaskUseCase {
     const deletedTask = await this.tasksRepository.removeTask(id);
 
     if (!deletedTask) {
-      throw new Error("Task doesn't exist!");
+      throw new AppError("Task doesn't exist!");
     }
   }
 }

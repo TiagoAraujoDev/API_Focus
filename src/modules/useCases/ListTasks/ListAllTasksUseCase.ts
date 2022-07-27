@@ -1,3 +1,4 @@
+import { AppError } from "../../../errors/AppError";
 import { Task } from "../../entities/Task";
 import { ITasksRepository } from "../../repositories/ITasksRepository";
 
@@ -8,7 +9,7 @@ class ListAllTasksUseCase {
     const tasks = await this.tasksRepository.list();
 
     if (!tasks) {
-      throw new Error("Unespected error!");
+      throw new AppError("Unexpected error!");
     }
 
     return tasks;

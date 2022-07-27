@@ -1,3 +1,4 @@
+import { AppError } from "../../../errors/AppError";
 import { Task } from "../../entities/Task";
 import { ITasksRepository } from "../../repositories/ITasksRepository";
 
@@ -12,7 +13,7 @@ class CheckTaskUseCase {
     const taskChecked = await this.tasksRepository.checkTask(id);
 
     if (!taskChecked) {
-      throw new Error("This Task doesn't exist!");
+      throw new AppError("This Task doesn't exist!");
     }
 
     return taskChecked;
