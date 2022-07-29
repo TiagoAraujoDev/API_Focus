@@ -1,11 +1,14 @@
 import { Router } from "express";
 
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import checkTaskController from "../modules/useCases/CheckTask";
 import createTaskController from "../modules/useCases/CreateTask";
 import deleteTaskController from "../modules/useCases/DeleteTask";
 import listAllTasksController from "../modules/useCases/ListTasks";
 
 const tasksRoutes = Router();
+
+tasksRoutes.use(ensureAuthenticated);
 
 tasksRoutes.post("/", (request, response) => {
   return createTaskController().handle(request, response);
