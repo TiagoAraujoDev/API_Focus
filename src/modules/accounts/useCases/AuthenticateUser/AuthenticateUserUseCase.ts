@@ -1,5 +1,6 @@
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/AppError";
 import { UsersRepository } from "../../infra/typeorm/repositories/UsersRepository";
@@ -9,8 +10,12 @@ interface IRequest {
   password: string;
 }
 
+@injectable()
 class AuthenticateUserUseCase {
-  constructor(private userRepository: UsersRepository) {}
+  constructor(
+    @inject("UsersRepository")
+    private userRepository: UsersRepository
+  ) {}
 
   async execute({ email, password }: IRequest) {
     const user = await this.userRepository.findByEmail(email);
