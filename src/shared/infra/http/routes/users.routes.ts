@@ -1,15 +1,14 @@
 import { Router } from "express";
 
-import authenticateUserController from "../modules/useCases/AuthenticateUser";
-import createUserController from "../modules/useCases/CreateUser";
+import { AuthenticateUserController } from "../../../../modules/accounts/useCases/AuthenticateUser/AuthenticateUserController";
+import { CreateUserController } from "../../../../modules/accounts/useCases/CreateUser/CreateUserController";
 
 const userRoutes = Router();
 
-userRoutes.post("/", (request, response) => {
-  return createUserController().handle(request, response);
-});
-userRoutes.post("/login", (request, response) => {
-  return authenticateUserController().handle(request, response);
-});
+const createUserController = new CreateUserController();
+const authenticateUserController = new AuthenticateUserController();
+
+userRoutes.post("/", createUserController.handle);
+userRoutes.post("/login", authenticateUserController.handle);
 
 export { userRoutes };

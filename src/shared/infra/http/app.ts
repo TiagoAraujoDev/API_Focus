@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 
 import "express-async-errors";
@@ -22,6 +23,6 @@ app.use(
   }
 );
 
-createConnection();
+createConnection("database_pomoroutine");
 
 export { app };

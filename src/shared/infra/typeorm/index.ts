@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { DataSource } from "typeorm";
 
 import { User } from "../../../modules/accounts/infra/typeorm/entities/User";
@@ -14,17 +13,18 @@ export const appDataSource = new DataSource({
   password: "1234",
   database: "pomoroutinedb",
   entities: [User, Task],
-  migrations: ["./src/database/migrations/*.ts"],
+  migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
 });
 
-export const createConnection = (host = "localhost") => {
-  appDataSource
+export const createConnection = async (
+  host = "localhost"
+): Promise<DataSource> => {
+  const dataSource = await appDataSource
     .setOptions({
       host,
     })
-    .initialize()
-    .then(async () => {
-      console.log("database initialized");
-    })
-    .catch((err) => console.log(err));
+    .initialize();
+
+  console.log("database initialized");
+  return dataSource;
 };

@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { CheckTaskUseCase } from "./CheckTaskUseCase";
 
 class CheckTaskController {
-  constructor(private checkTaskUseCase: CheckTaskUseCase) {}
-
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.headers;
 
-    const task = await this.checkTaskUseCase.execute({ id } as {
+    const checkTaskUseCase = container.resolve(CheckTaskUseCase);
+
+    const task = await checkTaskUseCase.execute({ id } as {
       id: string;
     });
 

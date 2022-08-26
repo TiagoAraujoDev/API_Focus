@@ -1,29 +1,26 @@
 import { Router } from "express";
 
+import { CheckTaskController } from "../../../../modules/tasks/useCases/CheckTask/CheckTaskController";
+import { CreateTaskController } from "../../../../modules/tasks/useCases/CreateTask/CreateTaskController";
+import { DeleteTaskController } from "../../../../modules/tasks/useCases/DeleteTask/DeleteTaskController";
+import { ListAllTasksController } from "../../../../modules/tasks/useCases/ListTasks/ListAllTasksController";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
-import checkTaskController from "../modules/useCases/CheckTask";
-import createTaskController from "../modules/useCases/CreateTask";
-import deleteTaskController from "../modules/useCases/DeleteTask";
-import listAllTasksController from "../modules/useCases/ListTasks";
 
 const tasksRoutes = Router();
 
+const createTaskController = new CreateTaskController();
+const listAllTasksController = new ListAllTasksController();
+const checkTaskController = new CheckTaskController();
+const deleteTaskController = new DeleteTaskController();
+
 tasksRoutes.use(ensureAuthenticated);
 
-tasksRoutes.post("/", (request, response) => {
-  return createTaskController().handle(request, response);
-});
+tasksRoutes.post("/", createTaskController.handle);
 
-tasksRoutes.get("/", (request, response) => {
-  return listAllTasksController().handle(request, response);
-});
+tasksRoutes.get("/", listAllTasksController.handle);
 
-tasksRoutes.put("/", (request, response) => {
-  return checkTaskController().handle(request, response);
-});
+tasksRoutes.put("/", checkTaskController.handle);
 
-tasksRoutes.delete("/", (request, response) => {
-  return deleteTaskController().handle(request, response);
-});
+tasksRoutes.delete("/", deleteTaskController.handle);
 
 export { tasksRoutes };

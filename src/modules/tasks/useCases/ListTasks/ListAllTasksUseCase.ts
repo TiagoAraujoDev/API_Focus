@@ -1,9 +1,15 @@
+import { inject, injectable } from "tsyringe";
+
 import { AppError } from "../../../../shared/errors/AppError";
 import { Task } from "../../infra/typeorm/entities/Task";
 import { ITasksRepository } from "../../repositories/ITasksRepository";
 
+@injectable()
 class ListAllTasksUseCase {
-  constructor(private tasksRepository: ITasksRepository) {}
+  constructor(
+    @inject("TasksRepository")
+    private tasksRepository: ITasksRepository
+  ) {}
 
   async execute(): Promise<Task[]> {
     const tasks = await this.tasksRepository.list();
