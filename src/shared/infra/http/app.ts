@@ -1,6 +1,8 @@
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 
+import "../../container";
+
 import "express-async-errors";
 import { AppError } from "../../errors/AppError";
 import { createConnection } from "../typeorm";

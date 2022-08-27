@@ -1,10 +1,8 @@
-import { Repository } from "typeorm";
+import { Equal, Repository } from "typeorm";
 
 import { appDataSource } from "../../../../../shared/infra/typeorm";
-import {
-  ICreateTaskDTO,
-  ITasksRepository,
-} from "../../../repositories/ITasksRepository";
+import { ICreateTaskDTO } from "../../../dtos/ICreateTaskDTO";
+import { ITasksRepository } from "../../../repositories/ITasksRepository";
 import { Task } from "../entities/Task";
 
 class TasksRepository implements ITasksRepository {
@@ -29,6 +27,14 @@ class TasksRepository implements ITasksRepository {
     });
 
     return tasks;
+  }
+
+  async listTasksByUsers(user_id: string): Promise<Task[]> {
+    const userTasks = await this.repository.findBy({
+      user_id: Equal(user_id),
+    });
+
+    return userTasks;
   }
 
   async checkTask(id: string): Promise<Task> {

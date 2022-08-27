@@ -1,9 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import {
-  ICreateTaskDTO,
-  ITasksRepository,
-} from "../../repositories/ITasksRepository";
+import { ICreateTaskDTO } from "../../dtos/ICreateTaskDTO";
+import { ITasksRepository } from "../../repositories/ITasksRepository";
 
 @injectable()
 class CreateTaskUseCase {
