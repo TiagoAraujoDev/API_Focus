@@ -34,7 +34,7 @@ export async function ensureAuthenticated(
     throw new AppError("User doesn't exist!", 401);
   }
 
-  const { password: _, ...authenticatedUser } = user;
+  const { password: u, ...authenticatedUser } = user;
 
   request.user = authenticatedUser;
 
