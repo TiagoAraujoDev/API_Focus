@@ -3,7 +3,10 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/AppError";
 import { User } from "../../infra/typeorm/entities/User";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import {
+  ICreateUserDTO,
+  IUsersRepository,
+} from "../../repositories/IUsersRepository";
 
 @injectable()
 class CreateUserUseCase {
@@ -11,7 +14,12 @@ class CreateUserUseCase {
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
   ) {}
-  async execute({ name, username, password, email }): Promise<User> {
+  async execute({
+    name,
+    username,
+    password,
+    email,
+  }: ICreateUserDTO): Promise<User> {
     const userAreadyExist = await this.usersRepository.findByEmail(email);
 
     if (userAreadyExist) {

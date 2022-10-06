@@ -1,23 +1,35 @@
 import bcryptjs from "bcryptjs";
+import dayjs from "dayjs";
 import jwt from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/AppError";
-import { UsersRepository } from "../../infra/typeorm/repositories/UsersRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { IUsersTokensRepository } from "../../repositories/IUsersTokensRepository";
 
 interface IRequest {
   email: string;
   password: string;
 }
 
+interface IResponse {
+  token: string;
+  user: {
+    name: string;
+    email: string;
+  };
+}
+
 @injectable()
 class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private userRepository: UsersRepository
+    private userRepository: IUsersRepository,
+    @inject("UsersTokensRepository")
+    private usersTokensRepository: IUsersTokensRepository
   ) {}
 
-  async execute({ email, password }: IRequest) {
+  async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
@@ -30,20 +42,31 @@ class AuthenticateUserUseCase {
       throw new AppError("Email or password is incorrect!");
     }
 
-    const token = jwt.sign(
-      { id: user.id },
-      "60aa9604807343718f0dad07ad10681f",
-      {
-        expiresIn: "1d",
-      }
-    );
+    // TODO move secret and expiresIn to .env
+    const token = jwt.sign({ email }, "60aa9604807343718f0dad07ad10681f", {
+      subject: user.id,
+      expiresIn: "1d",
+    });
 
-    const { password: _, ...userLogin } = user;
+    const expires_date_time = dayjs().add(1, "day").toDate();
 
-    return {
+    await this.usersTokensRepository.create({
       token,
-      user: userLogin,
+      user_id: user.id,
+      expires_date: expires_date_time,
+    });
+
+    // const { password: _, ...userLogin } = user;
+
+    const userToken: IResponse = {
+      token,
+      user: {
+        name: user.name,
+        email: user.email,
+      },
     };
+
+    return userToken;
   }
 }
 
