@@ -19,7 +19,7 @@ class RefreshTokenUseCase {
   ) {}
 
   async execute(token: string): Promise<UsersTokens> {
-    // TODO Move secret to .env
+    // TODO: Move secret to .env
     const { email, sub: user_id } = verify(
       token,
       "60aa9604807343718f0dad07ad10681f"

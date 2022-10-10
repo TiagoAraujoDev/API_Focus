@@ -42,7 +42,7 @@ class AuthenticateUserUseCase {
       throw new AppError("Email or password is incorrect!");
     }
 
-    // TODO move secret and expiresIn to .env
+    // TODO: move secret and expiresIn to .env
     const token = jwt.sign({ email }, "60aa9604807343718f0dad07ad10681f", {
       subject: user.id,
       expiresIn: "1d",
