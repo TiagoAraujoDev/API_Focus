@@ -17,11 +17,11 @@ class UsersTokensRepository implements IUsersTokensRepository {
   async create({
     user_id,
     expires_date,
-    token,
+    refresh_token,
   }: IUserstokensDTO): Promise<UsersTokens> {
     const userToken = this.repository.create({
       user_id,
-      token,
+      refresh_token,
       expires_date,
     });
 
@@ -36,12 +36,12 @@ class UsersTokensRepository implements IUsersTokensRepository {
 
   async findByUserIdAndToken(
     user_id: string,
-    token: string
+    refresh_token: string
   ): Promise<UsersTokens> {
     const userToken = await this.repository.findOne({
       where: {
         user_id,
-        token,
+        refresh_token,
       },
     });
 

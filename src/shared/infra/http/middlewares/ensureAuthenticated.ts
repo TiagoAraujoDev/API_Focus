@@ -1,16 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 
-import { UsersRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository";
 import { AppError } from "../../../errors/AppError";
 
 interface IPayload {
-  id: string;
+  sub: string;
 }
 
 export async function ensureAuthenticated(
   request: Request,
-  response: Response,
+  _: Response,
   next: NextFunction
 ) {
   const authHeader = request.headers.authorization;
@@ -21,23 +20,19 @@ export async function ensureAuthenticated(
 
   const [, token] = authHeader.split(" ");
 
-  // TODO: Move secret to .env
-  const { id } = jwt.verify(
-    token,
-    "60aa9604807343718f0dad07ad10681f"
-  ) as IPayload;
+  try {
+    // TODO: Move secret to .env
+    const { sub: user_id } = jwt.verify(
+      token,
+      "60aa9604807343718f0dad07ad10681f"
+    ) as IPayload;
 
-  const userRepository = new UsersRepository();
+    request.user = {
+      id: user_id,
+    };
 
-  const user = await userRepository.findById(id);
-
-  if (!user) {
-    throw new AppError("User doesn't exist!", 401);
+    next();
+  } catch {
+    throw new AppError("Invalid token!", 401);
   }
-
-  const { password: u, ...authenticatedUser } = user;
-
-  request.user = authenticatedUser;
-
-  next();
 }

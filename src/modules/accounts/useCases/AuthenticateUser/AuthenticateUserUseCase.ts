@@ -18,6 +18,7 @@ interface IResponse {
     name: string;
     email: string;
   };
+  refresh_token: string;
 }
 
 @injectable()
@@ -43,20 +44,27 @@ class AuthenticateUserUseCase {
     }
 
     // TODO: move secret and expiresIn to .env
-    const token = jwt.sign({ email }, "60aa9604807343718f0dad07ad10681f", {
+    const token = jwt.sign({}, "60aa9604807343718f0dad07ad10681f", {
       subject: user.id,
       expiresIn: "1d",
     });
 
-    const expires_date_time = dayjs().add(1, "day").toDate();
+    const refreshToken = jwt.sign(
+      { email },
+      "d8cf151fa0d1ae56d4954d173458cd0d",
+      {
+        subject: user.id,
+        expiresIn: "30d",
+      }
+    );
+
+    const expires_date_time = dayjs().add(30, "day").toDate();
 
     await this.usersTokensRepository.create({
-      token,
+      refresh_token: refreshToken,
       user_id: user.id,
       expires_date: expires_date_time,
     });
-
-    // const { password: _, ...userLogin } = user;
 
     const userToken: IResponse = {
       token,
@@ -64,6 +72,7 @@ class AuthenticateUserUseCase {
         name: user.name,
         email: user.email,
       },
+      refresh_token: refreshToken,
     };
 
     return userToken;
