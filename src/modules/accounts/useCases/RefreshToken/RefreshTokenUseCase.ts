@@ -22,17 +22,16 @@ class RefreshTokenUseCase {
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository
   ) {}
-
-  async execute(token: string): Promise<IResponse> {
-    // TODO: Move secret to .env
+  async execute(refresh_token: string): Promise<IResponse> {
+    //  TODO: Move secret to .env
     const { email, sub: user_id } = verify(
-      token,
-      "60aa9604807343718f0dad07ad10681f"
+      refresh_token,
+      "d8cf151fa0d1ae56d4954d173458cd0d"
     ) as IPayload;
 
     const userToken = await this.usersTokensRepository.findByUserIdAndToken(
       user_id,
-      email
+      refresh_token
     );
 
     if (!userToken) {

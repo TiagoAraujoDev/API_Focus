@@ -7,7 +7,6 @@ class RefreshTokenController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { refresh_token } = request.body;
 
-    // TODO: Create container
     const refreshTokenUseCase = container.resolve(RefreshTokenUseCase);
 
     const refreshToken = await refreshTokenUseCase.execute(refresh_token);

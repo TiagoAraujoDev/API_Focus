@@ -21,7 +21,7 @@ export async function ensureAuthenticated(
   const [, token] = authHeader.split(" ");
 
   try {
-    // TODO: Move secret to .env
+    //  TODO: Move secret to .env
     const { sub: user_id } = jwt.verify(
       token,
       "60aa9604807343718f0dad07ad10681f"
