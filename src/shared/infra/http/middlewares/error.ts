@@ -6,6 +6,7 @@ const errorHandling = (
   err: Error,
   _: Request,
   response: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
   if (err instanceof AppError) {
