@@ -1,5 +1,5 @@
-<h1 align="center">Pomoroutine - API</h1>
-<p align="center">API to manage data from the Pomoroutine application</p>
+<h1 align="center">FocusApp - API</h1>
+<p align="center">API to manage data from the Focus application</p>
 
 <p align="center">
  <a href="#pre-requisitos">Prerequisites</a> •
