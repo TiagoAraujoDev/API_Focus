@@ -23,10 +23,9 @@ class RefreshTokenUseCase {
     private usersTokensRepository: IUsersTokensRepository
   ) {}
   async execute(refresh_token: string): Promise<IResponse> {
-    //  TODO: Move secret to .env
     const { email, sub: user_id } = verify(
       refresh_token,
-      "d8cf151fa0d1ae56d4954d173458cd0d"
+      process.env.JWT_REFRESH_TOKEN_SECRET
     ) as IPayload;
 
     const userToken = await this.usersTokensRepository.findByUserIdAndToken(
@@ -38,7 +37,7 @@ class RefreshTokenUseCase {
       throw new AppError("Token does not exist!");
     }
 
-    const newToken = sign({}, "60aa9604807343718f0dad07ad10681f", {
+    const newToken = sign({}, process.env.JWT_TOKEN_SECRET, {
       subject: user_id,
       expiresIn: "1d",
     });

@@ -8,7 +8,7 @@
  <a href="#autor">Author</a>
 </p>
 <h4 align="center"> 
-    Pomoroutine API 🚀 in progress!
+    Focus API 🚀 in progress!
 </h4>
 
 <h3 id="pre-requisitos">Prerequisites</h3>
