@@ -22,7 +22,6 @@ app.use(express.json());
 app.use(router);
 app.use(errorHandling);
 
-// createConnection(process.env.POSTGRESQL_HOST_DEV);
-createConnection("database_focus");
+createConnection(process.env.POSTGRESQL_HOST);
 
 export { app };
