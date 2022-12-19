@@ -18,7 +18,7 @@ interface IResponse {
     name: string;
     email: string;
   };
-  refresh_token: string;
+  refreshToken: string;
 }
 
 @injectable()
@@ -67,7 +67,7 @@ class AuthenticateUserUseCase {
         name: user.name,
         email: user.email,
       },
-      refresh_token: refreshToken,
+      refreshToken,
     };
 
     return userToken;

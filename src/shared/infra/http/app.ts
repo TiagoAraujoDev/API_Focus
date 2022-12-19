@@ -1,5 +1,7 @@
 import "reflect-metadata";
+import cookieParser from "cookie-parser";
 import cors from "cors";
+import * as dotenv from "dotenv";
 import express from "express";
 import "express-async-errors";
 
@@ -10,7 +12,9 @@ import { corsOptions } from "./config/cors/corsOptions";
 import { errorHandling } from "./middlewares/error";
 import { router } from "./routes";
 
+dotenv.config();
 const app = express();
+app.use(cookieParser());
 
 app.use(cors(corsOptions));
 
