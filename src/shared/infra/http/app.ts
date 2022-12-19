@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(router);
 app.use(errorHandling);
 
-createConnection("database_pomoroutine");
+// createConnection(process.env.POSTGRESQL_HOST_DEV);
+createConnection("database_focus");
 
 export { app };

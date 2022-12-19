@@ -40,16 +40,17 @@ class TasksRepository implements ITasksRepository {
   async checkTask(id: string): Promise<Task> {
     const task = await this.repository.findOneBy({ id });
 
-    task.done = true;
+    task.done = !task.done;
 
     await this.repository.save(task);
 
     return task;
   }
+
   async removeTask(id: string): Promise<Task> {
     const task = await this.repository.findOneBy({ id });
 
-    this.repository.remove(task);
+    await this.repository.remove(task);
 
     return task;
   }
