@@ -8,7 +8,6 @@ import "express-async-errors";
 import "../../container";
 
 import { createConnection } from "../typeorm";
-// import { corsOptions } from "./config/cors/corsOptions";
 import { errorHandling } from "./middlewares/error";
 import { router } from "./routes";
 
