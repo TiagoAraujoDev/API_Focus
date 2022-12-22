@@ -31,9 +31,9 @@ app.use((_, res, next) => {
   next();
 });
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
-app.options("*", cors());
+// app.options("*", cors());
 
 app.use(router);
 app.use(errorHandling);
