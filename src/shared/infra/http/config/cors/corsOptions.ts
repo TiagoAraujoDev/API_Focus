@@ -4,6 +4,5 @@ import { allowedOrigins } from "./allowedOrigins";
 
 export const corsOptions: CorsOptions = {
   origin: allowedOrigins,
-  preflightContinue: true,
   optionsSuccessStatus: 200,
 };
