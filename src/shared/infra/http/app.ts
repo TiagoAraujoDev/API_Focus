@@ -8,6 +8,7 @@ import "express-async-errors";
 import "../../container";
 
 import { createConnection } from "../typeorm";
+import { allowedOrigins } from "./config/cors/allowedOrigins";
 import { corsOptions } from "./config/cors/corsOptions";
 import { errorHandling } from "./middlewares/error";
 import { router } from "./routes";
@@ -20,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.options("*", cors());
+app.options("*", cors({ credentials: true, origin: allowedOrigins }));
 
 app.use(router);
 app.use(errorHandling);
