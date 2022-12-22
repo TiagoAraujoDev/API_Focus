@@ -8,16 +8,18 @@ import "express-async-errors";
 import "../../container";
 
 import { createConnection } from "../typeorm";
+import { corsOptions } from "./config/cors/corsOptions";
 import { errorHandling } from "./middlewares/error";
 import { router } from "./routes";
 
 dotenv.config();
+
 const app = express();
+
 app.use(cookieParser());
-
-app.use(cors());
-
 app.use(express.json());
+app.use(cors(corsOptions));
+
 app.use(router);
 app.use(errorHandling);
 
