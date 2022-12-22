@@ -8,7 +8,7 @@ import "express-async-errors";
 import "../../container";
 
 import { createConnection } from "../typeorm";
-import { allowedOrigins } from "./config/cors/allowedOrigins";
+// import { allowedOrigins } from "./config/cors/allowedOrigins";
 import { corsOptions } from "./config/cors/corsOptions";
 import { errorHandling } from "./middlewares/error";
 import { router } from "./routes";
@@ -21,16 +21,17 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.all("*", (_, res, next) => {
-  res.header("Access-Control-Allow-Origin", allowedOrigins);
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
 });
 
 app.use(cors(corsOptions));
 
-app.options(
-  "*",
-  cors({ credentials: true, origin: true, preflightContinue: true })
-);
+app.options("*", cors());
 
 app.use(router);
 app.use(errorHandling);
