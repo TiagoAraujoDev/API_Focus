@@ -20,7 +20,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.options("*", cors({ credentials: true, origin: true }));
+app.options(
+  "*",
+  cors({ credentials: true, origin: true, preflightContinue: true })
+);
 
 app.use(router);
 app.use(errorHandling);
