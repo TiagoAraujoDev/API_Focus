@@ -20,6 +20,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
 
+app.options("*", cors());
+
 app.use(router);
 app.use(errorHandling);
 
