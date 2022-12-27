@@ -7,12 +7,23 @@ import { Task } from "../../../modules/tasks/infra/typeorm/entities/Task";
 
 dotenv.config();
 
-console.log(process.env.POSTGRESQL_HOST);
 const DB_PORT = Number(process.env.POSTGRESQL_PORT);
-/* docker compose exec app node --require ts-node/register ./node_modules/typeorm/cli.js migration:run -d src/shared/infra/typeorm
-yarn typeorm migration:create src/database/migrations/CreateCategories */
+
+/*
+ * TypeORM commands doc
+ *
+ * Create a migration
+ * $ yarn typeorm migration:create src/shared/infra/typeorm/migrations/CreateCategories
+ *
+ * Run/revert migrations
+ * $ yarn typeorm:runMigrations -> in this case run
+ * script to:
+ * $ node --require ts-node/register ./node_modules/typeorm/cli.js migration:{run/revert} --dataSource {path/to/DataSource}
+ *
+ */
 export const appDataSource = new DataSource({
-  url: process.env.POSTGRESQL_DB_URL,
+  //  WARN: Uncomment the url for production
+  // url: process.env.POSTGRESQL_DB_URL,
   type: "postgres",
   host: process.env.POSTGRESQL_HOST,
   port: DB_PORT,
@@ -32,7 +43,8 @@ export const createConnection = async (
     })
     .initialize();
 
-  await appDataSource.runMigrations();
+  //  WARN: Uncomment runMigrations() for production
+  // await appDataSource.runMigrations();
   console.log("database initialized");
   return dataSource;
 };

@@ -26,6 +26,7 @@ app.options("*", cors());
 app.use(router);
 app.use(errorHandling);
 
-createConnection(process.env.POSTGRESQL_HOST);
+//  WARN: Add process.env.POSTGRESQL_HOST as an argument for createConnection() for production
+createConnection();
 
 export { app };
