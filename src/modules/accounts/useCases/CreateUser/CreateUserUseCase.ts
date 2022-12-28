@@ -20,10 +20,20 @@ class CreateUserUseCase {
     password,
     email,
   }: ICreateUserDTO): Promise<User> {
-    const userAreadyExist = await this.usersRepository.findByEmail(email);
+    if (!name || !username || !password || !email) {
+      throw new AppError("Name, username, password and email are required!");
+    }
 
+    const userAreadyExist = await this.usersRepository.findByEmail(email);
     if (userAreadyExist) {
-      throw new AppError("Email already registered!");
+      throw new AppError("Email already registered!", 409);
+    }
+
+    const duplicateUsername = await this.usersRepository.findByUsername(
+      username
+    );
+    if (duplicateUsername) {
+      throw new AppError("Username unavailable!");
     }
 
     const passwordHash = await hash(password, 8);

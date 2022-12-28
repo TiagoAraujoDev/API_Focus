@@ -11,6 +11,7 @@ interface IUsersRepository {
   create({ name, username, email, password }: ICreateUserDTO): Promise<User>;
   findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;
+  findByUsername(username: string): Promise<User>;
 }
 
 export { IUsersRepository, ICreateUserDTO };

@@ -8,7 +8,7 @@ class RefreshTokenController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { cookies } = request;
 
-    if (!cookies.jwt) {
+    if (!cookies?.jwt) {
       throw new AppError("No jwt available", 401);
     }
 

@@ -16,7 +16,9 @@ class CreateUserController {
       password,
     });
 
-    return response.status(201).json({ user });
+    const { password: _, ...responseUser } = user;
+
+    return response.status(201).json({ responseUser });
   }
 }
 

@@ -15,7 +15,7 @@ interface IRequest {
 interface IResponse {
   token: string;
   user: {
-    name: string;
+    id: string;
     email: string;
   };
   refreshToken: string;
@@ -31,6 +31,10 @@ class AuthenticateUserUseCase {
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
+    if (!email || !password) {
+      throw new AppError("Email and password are required!");
+    }
+
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
@@ -55,6 +59,12 @@ class AuthenticateUserUseCase {
 
     const expires_date_time = dayjs().add(30, "day").toDate();
 
+    const oldRefreshToken = await this.usersTokensRepository.findByUserId(
+      user.id
+    );
+    if (oldRefreshToken) {
+      await this.usersTokensRepository.delete(oldRefreshToken?.id);
+    }
     await this.usersTokensRepository.create({
       refresh_token: refreshToken,
       user_id: user.id,
@@ -64,7 +74,7 @@ class AuthenticateUserUseCase {
     const userToken: IResponse = {
       token,
       user: {
-        name: user.name,
+        id: user.id,
         email: user.email,
       },
       refreshToken,
