@@ -16,13 +16,14 @@ class CheckTaskUseCase {
   ) {}
 
   async execute({ id }: IRequest): Promise<Task> {
-    const taskChecked = await this.tasksRepository.checkTask(id);
-
-    if (!taskChecked) {
+    const task = await this.tasksRepository.findById(id);
+    if (!task) {
       throw new AppError("This Task doesn't exist!");
     }
+    task.done = !task.done;
+    const checkedTask = await this.tasksRepository.checkTask(task);
 
-    return taskChecked;
+    return checkedTask;
   }
 }
 

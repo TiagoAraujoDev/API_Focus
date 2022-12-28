@@ -15,7 +15,7 @@ class ListUserTasksUseCase {
   ) {}
 
   async execute({ user_id }: IRequest): Promise<Task[]> {
-    const userTasks = await this.tasksRepository.listTasksByUsers(user_id);
+    const userTasks = await this.tasksRepository.listTasksByUserId(user_id);
 
     return userTasks;
   }

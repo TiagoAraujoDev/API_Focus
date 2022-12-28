@@ -21,7 +21,7 @@ tasksRoutes.post("/", createTaskController.handle);
 
 tasksRoutes.get("/", listAllTasksController.handle);
 
-tasksRoutes.get("/user/:user_id", listUserTasksController.handle);
+tasksRoutes.get("/user", listUserTasksController.handle);
 
 tasksRoutes.put("/", checkTaskController.handle);
 

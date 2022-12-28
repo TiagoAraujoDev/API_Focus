@@ -11,6 +11,11 @@ class TasksRepository implements ITasksRepository {
   constructor() {
     this.repository = appDataSource.getRepository(Task);
   }
+  async findById(id: string): Promise<Task> {
+    const task = await this.repository.findOneBy({ id });
+
+    return task;
+  }
 
   async create({ title, user_id }: ICreateTaskDTO): Promise<void> {
     const newTask = this.repository.create({
@@ -29,7 +34,7 @@ class TasksRepository implements ITasksRepository {
     return tasks;
   }
 
-  async listTasksByUsers(user_id: string): Promise<Task[]> {
+  async listTasksByUserId(user_id: string): Promise<Task[]> {
     const userTasks = await this.repository.findBy({
       user_id: Equal(user_id),
     });
@@ -37,22 +42,16 @@ class TasksRepository implements ITasksRepository {
     return userTasks;
   }
 
-  async checkTask(id: string): Promise<Task> {
-    const task = await this.repository.findOneBy({ id });
-
-    task.done = !task.done;
-
+  async checkTask(task: Task): Promise<Task> {
     await this.repository.save(task);
 
     return task;
   }
 
-  async removeTask(id: string): Promise<Task> {
+  async removeTask(id: string): Promise<void> {
     const task = await this.repository.findOneBy({ id });
 
     await this.repository.remove(task);
-
-    return task;
   }
 }
 

@@ -15,11 +15,12 @@ class DeleteTaskUseCase {
   ) {}
 
   async execute({ id }: IRequest): Promise<void> {
-    const deletedTask = await this.tasksRepository.removeTask(id);
-
-    if (!deletedTask) {
-      throw new AppError("Task doesn't exist!");
+    const task = await this.tasksRepository.findById(id);
+    if (!task) {
+      throw new AppError("Task not found!");
     }
+
+    await this.tasksRepository.removeTask(id);
   }
 }
 

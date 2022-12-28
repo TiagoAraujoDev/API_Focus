@@ -13,7 +13,6 @@ class ListAllTasksUseCase {
 
   async execute(): Promise<Task[]> {
     const tasks = await this.tasksRepository.list();
-
     if (!tasks) {
       throw new AppError("Unexpected error!");
     }
