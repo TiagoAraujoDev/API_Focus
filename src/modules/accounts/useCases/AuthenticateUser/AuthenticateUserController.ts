@@ -8,13 +8,12 @@ class AuthenticateUserController {
     const { email, password } = request.body;
 
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase);
-
-    const data = await authenticateUserUseCase.execute({
+    const SessionData = await authenticateUserUseCase.execute({
       email,
       password,
     });
 
-    const { token, refreshToken, user } = data;
+    const { token, refreshToken, user } = SessionData;
 
     response.cookie("jwt", refreshToken, {
       httpOnly: true,
@@ -22,7 +21,6 @@ class AuthenticateUserController {
       secure: true,
       maxAge: 1000 * 60 * 60 * 24,
     });
-
     return response.json({ token, user });
   }
 }

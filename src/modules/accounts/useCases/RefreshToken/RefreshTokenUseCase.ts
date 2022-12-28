@@ -19,6 +19,7 @@ class RefreshTokenUseCase {
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository
   ) {}
+
   async execute(refresh_token: string): Promise<IResponse> {
     const { sub: user_id } = verify(
       refresh_token,
@@ -29,7 +30,6 @@ class RefreshTokenUseCase {
       user_id,
       refresh_token
     );
-
     if (refreshToken?.refresh_token !== refresh_token) {
       throw new AppError("Invalid Token!", 403);
     }
@@ -42,7 +42,6 @@ class RefreshTokenUseCase {
     const response: IResponse = {
       token: newToken,
     };
-
     return response;
   }
 }
