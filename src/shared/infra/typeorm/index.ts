@@ -23,7 +23,7 @@ const DB_PORT = Number(process.env.POSTGRESQL_PORT);
  */
 export const appDataSource = new DataSource({
   //  WARN: Uncomment the url for production
-  // url: process.env.POSTGRESQL_DB_URL,
+  url: process.env.POSTGRESQL_DB_URL,
   type: "postgres",
   host: process.env.POSTGRESQL_HOST,
   port: DB_PORT,
@@ -44,7 +44,7 @@ export const createConnection = async (
     .initialize();
 
   //  WARN: Uncomment runMigrations() for production
-  // await appDataSource.runMigrations();
+  await appDataSource.runMigrations();
   console.log("database initialized");
   return dataSource;
 };

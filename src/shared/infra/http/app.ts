@@ -27,6 +27,6 @@ app.use(router);
 app.use(errorHandling);
 
 //  WARN: Add process.env.POSTGRESQL_HOST as an argument for createConnection() for production
-createConnection();
+createConnection(process.env.POSTGRESQL_HOST);
 
 export { app };
