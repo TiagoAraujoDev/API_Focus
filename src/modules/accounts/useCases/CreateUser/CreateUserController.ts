@@ -15,6 +15,7 @@ class CreateUserController {
       password,
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...responseUser } = user;
 
     return response.status(201).json({ responseUser });
