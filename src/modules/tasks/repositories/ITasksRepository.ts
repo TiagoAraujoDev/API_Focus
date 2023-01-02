@@ -3,7 +3,7 @@ import { Task } from "../infra/typeorm/entities/Task";
 
 interface ITasksRepository {
   findById(id: string): Promise<Task>;
-  create({ title, user_id }: ICreateTaskDTO): Promise<void>;
+  create({ title, user_id }: ICreateTaskDTO): Promise<Task>;
   list(): Promise<Task[]>;
   checkTask(task: Task): Promise<Task>;
   removeTask(task_id: string): Promise<void>;

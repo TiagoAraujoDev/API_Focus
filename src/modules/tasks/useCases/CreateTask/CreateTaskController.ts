@@ -14,9 +14,9 @@ class CreateTaskController {
     }
 
     const createTaskUseCase = container.resolve(CreateTaskUseCase);
-    await createTaskUseCase.execute({ title, user_id });
+    const newTask = await createTaskUseCase.execute({ title, user_id });
 
-    return response.status(201).send();
+    return response.status(201).json(newTask);
   }
 }
 
