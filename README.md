@@ -20,7 +20,7 @@ Besides, it's good to have an editor to work with the code like [VSCode](https:/
 <h3 id="objetivo">🎯 Goals</h3>
 
 - To build this API I used the S.O.L.I.D principles and clean code.
-- All the authentication is made with JWT and refresh-token strategy. First I made a authentication endpoint that receives the email and password in the request and respond with user's information, an access token and a refresh-token, but the refresh-token is sent in a httpOnly cookie for more security. In all the requests a middleware intercepts and verify the access token and after a successful verification the request go on. When the refresh-token expires there's a endpoint "/refresh-token" that send back a new access token.
+- All the authentication is made with JWT and refresh-token strategy. First I made an authentication endpoint that receives the email and password in the request and respond with user's information, an access token and a refresh-token, but the refresh-token is sent in a httpOnly cookie for more security. In all the requests a middleware intercepts and verify the access token and after a successful verification the request go on. When the refresh-token expires there's an endpoint "/refresh-token" that send back a new access token.
 - To manage and persist Tasks creation, modification in status, modification in content, deletion and listing I used PostgreSQL and TypeORM 
 
 <h3 id="tecnologias">🛠 technologies</h3>
