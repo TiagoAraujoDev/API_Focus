@@ -31,6 +31,7 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
   async findByEmail(email: string): Promise<User> {
     const user = await this.repository.findOneBy({ email });
 
@@ -42,10 +43,21 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
   async findByUsername(username: string): Promise<User> {
     const user = await this.repository.findOneBy({ username });
 
     return user;
+  }
+
+  async listUsers(): Promise<User[]> {
+    const users = await this.repository.find({
+      relations: {
+        tasks: true,
+      },
+    });
+
+    return users;
   }
 }
 
