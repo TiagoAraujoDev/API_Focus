@@ -14,22 +14,22 @@ class User {
   @PrimaryColumn()
   id?: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   name: string;
 
-  @Column()
+  @Column({ type: "varchar", unique: true })
   username: string;
 
-  @Column()
+  @Column({ type: "varchar", unique: true })
   email: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   password: string;
 
-  @Column()
+  @Column({ type: "varchar", nullable: true })
   avatar?: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "varchar" })
   created_at: Date;
 
   @OneToMany(() => Task, (task) => task.user)

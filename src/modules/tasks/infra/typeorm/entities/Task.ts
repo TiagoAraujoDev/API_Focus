@@ -15,24 +15,24 @@ class Task {
   @PrimaryColumn()
   id?: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   title: string;
 
-  @Column()
+  @Column({ type: "boolean", default: false })
   done: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamp", update: true })
   updated_at: Date;
-
-  @Column()
-  user_id: string;
 
   @ManyToOne(() => User, (user) => user.tasks)
   @JoinColumn({ name: "user_id" })
   user: User;
+
+  @Column()
+  user_id: string;
 
   constructor() {
     if (!this.id) {

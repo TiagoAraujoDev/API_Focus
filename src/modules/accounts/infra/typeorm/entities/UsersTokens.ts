@@ -15,7 +15,7 @@ class UsersTokens {
   @PrimaryColumn()
   id: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   refresh_token: string;
 
   @ManyToOne(() => User)
@@ -25,10 +25,10 @@ class UsersTokens {
   @Column()
   user_id: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   expires_date: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
 
   constructor() {
