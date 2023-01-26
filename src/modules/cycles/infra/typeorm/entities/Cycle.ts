@@ -23,7 +23,7 @@ class Cycle {
   @Column({ type: "timestamp", nullable: true })
   finishedDate?: Date;
 
-  @ManyToOne(() => User, (user) => user.cycle)
+  @ManyToOne(() => User, (user) => user.cycles)
   @JoinColumn({ name: "user_id" })
   user: User;
 

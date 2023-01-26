@@ -37,7 +37,7 @@ class User {
   tasks: Task[];
 
   @OneToMany(() => Cycle, (cycle) => cycle.user)
-  cycle: Cycle[];
+  cycles: Cycle[];
 
   constructor() {
     if (!this.id) {
