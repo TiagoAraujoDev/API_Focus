@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 
 import { User } from "../../../modules/accounts/infra/typeorm/entities/User";
 import { UsersTokens } from "../../../modules/accounts/infra/typeorm/entities/UsersTokens";
+import { Cycle } from "../../../modules/cycles/infra/typeorm/entities/Cycle";
 import { Task } from "../../../modules/tasks/infra/typeorm/entities/Task";
 
 dotenv.config();
@@ -30,7 +31,7 @@ export const appDataSource = new DataSource({
   username: process.env.POSTGRESQL_USERNAME,
   password: process.env.POSTGRESQL_PASSWORD,
   database: process.env.POSTGRESQL_DATABASE,
-  entities: [User, Task, UsersTokens],
+  entities: [User, Task, UsersTokens, Cycle],
   migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
 });
 
@@ -44,7 +45,7 @@ export const createConnection = async (
     .initialize();
 
   //  WARN: Uncomment runMigrations() for production
-  await appDataSource.runMigrations();
+  // await appDataSource.runMigrations();
   console.log("database initialized");
   return dataSource;
 };

@@ -25,7 +25,7 @@ class UsersTokens {
   @Column()
   user_id: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "timestamp" })
   expires_date: Date;
 
   @CreateDateColumn({ type: "timestamp" })

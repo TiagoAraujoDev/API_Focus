@@ -4,6 +4,8 @@ import { UsersRepository } from "../../modules/accounts/infra/typeorm/repositori
 import { UsersTokensRepository } from "../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
 import { IUsersRepository } from "../../modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "../../modules/accounts/repositories/IUsersTokensRepository";
+import { CyclesRepository } from "../../modules/cycles/infra/typeorm/repositories/CyclesRepository";
+import { ICyclesRepository } from "../../modules/cycles/repositories/ICyclesRepository";
 import { TasksRepository } from "../../modules/tasks/infra/typeorm/repositories/TasksRepository";
 import { ITasksRepository } from "../../modules/tasks/repositories/ITasksRepository";
 
@@ -20,4 +22,9 @@ container.registerSingleton<ITasksRepository>(
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
   UsersTokensRepository
+);
+
+container.registerSingleton<ICyclesRepository>(
+  "CyclesRepository",
+  CyclesRepository
 );
