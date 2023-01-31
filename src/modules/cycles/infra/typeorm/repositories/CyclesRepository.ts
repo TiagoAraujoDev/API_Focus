@@ -31,6 +31,18 @@ class CyclesRepository implements ICyclesRepository {
 
     return cycle;
   }
+
+  async interrupt(id: string): Promise<void> {
+    const cycle = await this.repository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    cycle.interruptedDate = new Date();
+
+    await this.repository.save(cycle);
+  }
 }
 
 export { CyclesRepository };

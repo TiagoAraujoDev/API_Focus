@@ -9,6 +9,7 @@ export interface ICreateCycleDTO {
 
 interface ICyclesRepository {
   create(cycle: ICreateCycleDTO): Promise<Cycle>;
+  interrupt(id: string): Promise<void>;
 }
 
 export { ICyclesRepository };
