@@ -65,6 +65,12 @@ class CyclesRepository implements ICyclesRepository {
 
     return cycle;
   }
+
+  async getAll(): Promise<Cycle[]> {
+    const cycles = await this.repository.find();
+
+    return cycles;
+  }
 }
 
 export { CyclesRepository };
