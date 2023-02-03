@@ -19,7 +19,7 @@ class FinishCycleController {
     const finishCycleUseCase = container.resolve(FinishCycleUseCase);
     await finishCycleUseCase.execute(id);
 
-    return response.status(204);
+    return response.sendStatus(204);
   }
 }
 
