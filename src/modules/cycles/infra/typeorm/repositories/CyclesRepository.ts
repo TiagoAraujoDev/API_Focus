@@ -43,6 +43,28 @@ class CyclesRepository implements ICyclesRepository {
 
     await this.repository.save(cycle);
   }
+
+  async finish(id: string): Promise<void> {
+    const cycle = await this.repository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    cycle.finishedDate = new Date();
+
+    await this.repository.save(cycle);
+  }
+
+  async findById(id: string): Promise<Cycle> {
+    const cycle = await this.repository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return cycle;
+  }
 }
 
 export { CyclesRepository };
