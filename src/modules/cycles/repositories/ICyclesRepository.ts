@@ -12,6 +12,7 @@ interface ICyclesRepository {
   interrupt(id: string): Promise<void>;
   finish(id: string): Promise<void>;
   findById(id: string): Promise<Cycle>;
+  delete(id: string): Promise<void>;
   getAll(): Promise<Cycle[]>;
 }
 

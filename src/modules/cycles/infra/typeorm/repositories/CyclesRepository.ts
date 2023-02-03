@@ -71,6 +71,10 @@ class CyclesRepository implements ICyclesRepository {
 
     return cycles;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id);
+  }
 }
 
 export { CyclesRepository };
