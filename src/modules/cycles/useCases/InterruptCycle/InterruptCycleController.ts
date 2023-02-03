@@ -9,17 +9,17 @@ class InterruptCycleController {
     const { id } = request.headers;
 
     if (!id) {
-      throw new AppError("Missing cycle id!", 404);
+      throw new AppError("Missing cycle id!");
     }
 
     if (Array.isArray(id)) {
-      throw new AppError("Too many ids sent!", 404);
+      throw new AppError("Too many ids sent!");
     }
 
     const interruptCycleUseCase = container.resolve(InterruptCycleUseCase);
     await interruptCycleUseCase.execute(id);
 
-    return response.status(204);
+    return response.sendStatus(204);
   }
 }
 
