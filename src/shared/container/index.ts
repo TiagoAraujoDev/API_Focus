@@ -8,6 +8,8 @@ import { CyclesRepository } from "../../modules/cycles/infra/typeorm/repositorie
 import { ICyclesRepository } from "../../modules/cycles/repositories/ICyclesRepository";
 import { TasksRepository } from "../../modules/tasks/infra/typeorm/repositories/TasksRepository";
 import { ITasksRepository } from "../../modules/tasks/repositories/ITasksRepository";
+import { IStorageProvider } from "./providers/storageProvider/IStorageProvider";
+import { StorageProvider } from "./providers/storageProvider/StorageProvider";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -27,4 +29,9 @@ container.registerSingleton<IUsersTokensRepository>(
 container.registerSingleton<ICyclesRepository>(
   "CyclesRepository",
   CyclesRepository
+);
+
+container.registerSingleton<IStorageProvider>(
+  "StorageProvider",
+  StorageProvider
 );
