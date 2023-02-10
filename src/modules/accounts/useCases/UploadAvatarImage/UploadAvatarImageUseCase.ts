@@ -25,7 +25,7 @@ class UploadAvatarImageUseCase {
 
     await this.storageProvider.save(file.filename);
     user.avatar = file.filename;
-    await this.usersRepository.create(user);
+    await this.usersRepository.update(user);
   }
 }
 

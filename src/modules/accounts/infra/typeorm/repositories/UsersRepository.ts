@@ -32,6 +32,10 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  async update(user: User): Promise<void> {
+    await this.repository.save(user);
+  }
+
   async findByEmail(email: string): Promise<User> {
     const user = await this.repository.findOneBy({ email });
 
