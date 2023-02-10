@@ -46,6 +46,9 @@ class StorageProvider implements IStorageProvider {
 
     const putCommand = new PutObjectCommand(putParams);
     await this.s3.send(putCommand);
+
+    // delete file
+    await fsPromise.unlink(filePath);
   }
 
   async delete(file: string): Promise<void> {
