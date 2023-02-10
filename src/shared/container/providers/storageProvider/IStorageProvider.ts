@@ -1,6 +1,6 @@
 interface IStorageProvider {
   get(file: string): Promise<string>;
-  save(file: string): Promise<void>;
+  save(file: string, mimeType: string): Promise<void>;
   delete(file: string): Promise<void>;
 }
 

@@ -23,7 +23,7 @@ class UploadAvatarImageUseCase {
       await this.storageProvider.delete(file.filename);
     }
 
-    await this.storageProvider.save(file.filename);
+    await this.storageProvider.save(file.filename, file.mimetype);
     user.avatar = file.filename;
     await this.usersRepository.update(user);
   }
