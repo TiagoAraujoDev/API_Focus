@@ -20,7 +20,7 @@ class UploadAvatarImageUseCase {
     }
 
     if (user.avatar) {
-      await this.storageProvider.delete(file.filename);
+      await this.storageProvider.delete(user.avatar);
     }
 
     await this.storageProvider.save(file.filename, file.mimetype);

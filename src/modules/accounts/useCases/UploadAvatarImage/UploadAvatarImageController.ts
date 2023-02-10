@@ -6,7 +6,6 @@ import { UploadAvatarImageUseCase } from "./UploadAvatarImageUseCase";
 
 class UploadAvatarImageController {
   async handle(request: Request, response: Response): Promise<Response> {
-    // TODO:
     const { id: user_id } = request.headers;
     const { file } = request;
 
@@ -23,7 +22,7 @@ class UploadAvatarImageController {
     );
     await uploadAvatarImageUseCase.execute(file, user_id);
 
-    return response.status(201).json({ message: "ok" });
+    return response.status(204);
   }
 }
 

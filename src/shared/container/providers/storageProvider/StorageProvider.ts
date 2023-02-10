@@ -48,20 +48,16 @@ class StorageProvider implements IStorageProvider {
   async save(file: string, mimeType: string): Promise<void> {
     const filePath = path.resolve(multerConfig.tempFolder, file);
     const fileContent = await fsPromise.readFile(filePath);
-    console.log(fileContent);
 
-    // save in s3
     const putParams: PutObjectCommandInput = {
       Bucket: bucketName,
       Key: file,
       Body: fileContent,
       ContentType: mimeType,
     };
-
     const putCommand = new PutObjectCommand(putParams);
     await this.s3.send(putCommand);
 
-    // delete file
     await fsPromise.unlink(filePath);
   }
 
