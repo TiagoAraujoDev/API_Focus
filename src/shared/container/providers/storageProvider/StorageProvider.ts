@@ -1,4 +1,6 @@
 import {
+  DeleteObjectCommand,
+  DeleteObjectCommandInput,
   PutObjectCommand,
   PutObjectCommandInput,
   S3,
@@ -52,7 +54,12 @@ class StorageProvider implements IStorageProvider {
   }
 
   async delete(file: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    const deleteParams: DeleteObjectCommandInput = {
+      Bucket: bucketName,
+      Key: file,
+    };
+    const deleteCommand = new DeleteObjectCommand(deleteParams);
+    await this.s3.send(deleteCommand);
   }
 }
 
