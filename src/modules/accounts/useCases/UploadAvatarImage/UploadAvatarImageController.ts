@@ -22,7 +22,7 @@ class UploadAvatarImageController {
     );
     await uploadAvatarImageUseCase.execute(file, user_id);
 
-    return response.status(204);
+    return response.sendStatus(204);
   }
 }
 
