@@ -1,10 +1,13 @@
 import {
   DeleteObjectCommand,
   DeleteObjectCommandInput,
+  GetObjectCommand,
+  GetObjectCommandInput,
   PutObjectCommand,
   PutObjectCommandInput,
   S3,
 } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import fsPromise from "node:fs/promises";
 import path from "node:path";
 
@@ -30,7 +33,16 @@ class StorageProvider implements IStorageProvider {
   }
 
   async get(file: string): Promise<string> {
-    throw new Error("Method not implemented.");
+    const getParams: GetObjectCommandInput = {
+      Bucket: bucketName,
+      Key: file,
+    };
+    const getCommand = new GetObjectCommand(getParams);
+    const url = await getSignedUrl(this.s3, getCommand, {
+      expiresIn: 3600 * 24,
+    });
+
+    return url;
   }
 
   async save(file: string, mimeType: string): Promise<void> {
