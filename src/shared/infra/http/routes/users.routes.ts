@@ -1,7 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 
-import { multerConfig } from "../../../../config/multer";
+import { multerConfig } from "../config/multer/multerConfig";
 import { AuthenticateUserController } from "../../../../modules/accounts/useCases/AuthenticateUser/AuthenticateUserController";
 import { CreateUserController } from "../../../../modules/accounts/useCases/CreateUser/CreateUserController";
 import { GetUserController } from "../../../../modules/accounts/useCases/GetUser/GetUserController";

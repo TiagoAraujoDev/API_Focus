@@ -11,7 +11,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import fsPromise from "node:fs/promises";
 import path from "node:path";
 
-import { multerConfig } from "../../../../config/multer";
+import { multerConfig } from "../../../infra/http/config/multer/multerConfig";
 import { IStorageProvider } from "./IStorageProvider";
 
 const bucketName = process.env.BUCKET_NAME;
