@@ -18,13 +18,9 @@ const listUserTasksController = new ListUserTasksController();
 tasksRoutes.use(ensureAuthenticated);
 
 tasksRoutes.post("/", createTaskController.handle);
-
 tasksRoutes.get("/", listAllTasksController.handle);
-
 tasksRoutes.get("/user", listUserTasksController.handle);
-
-tasksRoutes.put("/", checkTaskController.handle);
-
+tasksRoutes.patch("/", checkTaskController.handle);
 tasksRoutes.delete("/", deleteTaskController.handle);
 
 export { tasksRoutes };
