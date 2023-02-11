@@ -2,7 +2,16 @@ import multer from "multer";
 import crypto from "node:crypto";
 import path from "node:path";
 
-const tempFolder = path.join(__dirname, "..", "..", "tmp");
+const tempFolder = path.join(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "..",
+  "..",
+  "..",
+  "tmp"
+);
 
 export const multerConfig = {
   tempFolder,

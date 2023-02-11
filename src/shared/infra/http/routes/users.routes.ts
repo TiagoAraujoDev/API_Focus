@@ -29,6 +29,7 @@ userRoutes.get("/user", ensureAuthenticated, getUserController.handle);
 
 userRoutes.post(
   "/avatar",
+  ensureAuthenticated,
   upload.single("avatar"),
   uploadAvatarImageController.handle
 );
