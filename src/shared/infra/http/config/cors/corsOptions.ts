@@ -13,6 +13,6 @@ export const corsOptions: CorsOptions = {
   credentials: true,
   allowedHeaders:
     "id, Authorization, Origin, X-Requested-With, Content-Type, Accept",
-  methods: "POST, GET, PUT, DELETE",
+  methods: "PATCH, POST, GET, PUT, DELETE",
   optionsSuccessStatus: 200,
 };
