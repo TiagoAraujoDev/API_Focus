@@ -52,7 +52,7 @@ class AuthenticateUserUseCase {
 
     const refreshToken = sign({ email }, process.env.JWT_REFRESH_TOKEN_SECRET, {
       subject: user.id,
-      expiresIn: "30d",
+      expiresIn: "3d",
     });
 
     const expires_date_time = dayjs().add(30, "day").toDate();
