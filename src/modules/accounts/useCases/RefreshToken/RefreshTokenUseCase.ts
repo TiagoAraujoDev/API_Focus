@@ -36,7 +36,7 @@ class RefreshTokenUseCase {
 
     const newToken = sign({}, process.env.JWT_TOKEN_SECRET, {
       subject: user_id,
-      expiresIn: 120,
+      expiresIn: 60,
     });
 
     const response: IResponse = {
