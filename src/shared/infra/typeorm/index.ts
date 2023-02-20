@@ -45,7 +45,7 @@ export const createConnection = async (
     .initialize();
 
   //  WARN: Uncomment runMigrations() for production
-  await appDataSource.runMigrations();
+  // await appDataSource.runMigrations();
   console.log("database initialized");
   return dataSource;
 };
